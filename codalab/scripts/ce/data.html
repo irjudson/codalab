@@ -1,0 +1,88 @@
+<h3>Data Files</h3>
+
+<table id="data-files" class="nicetable full roomy align-top border">   
+    <thead>
+        <tr>
+            <th colspan="2">File Name</th> 
+            <th>Available Formats</th>         
+        </tr> 
+    </thead>
+
+    <tbody>
+        <tr>
+
+            <td class="file-name" colspan="2" rowspan="1">SUP1data_text</td>
+            <td>
+                <a href="/c/cause-effect-pairs/download/SUP1data_text.zip" name="SUP1data_text.zip">.zip (74.23 mb)</a>
+            </td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td class="file-name" colspan="2" rowspan="1">SUP2data_text</td>
+            <td>
+                <a href="/c/cause-effect-pairs/download/SUP2data_text.zip" name="SUP2data_text.zip">.zip (55.03 mb)</a>
+            </td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td class="file-name" colspan="2" rowspan="1">CEfinal_test_text</td>
+            <td>
+                <a href="/c/cause-effect-pairs/download/CEfinal_test_text.zip" name="CEfinal_test_text.zip">.zip (33.21 mb)</a>
+            </td>
+        </tr>
+    <tbody>
+        <tr>
+            <td class="file-name" colspan="2" rowspan="1">CEfinal_valid_text</td>
+            <td>
+                <a href="/c/cause-effect-pairs/download/CEfinal_valid_text.zip" name="CEfinal_valid_text.zip">.zip (33.48 mb)</a>
+            </td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td class="file-name" colspan="2" rowspan="1">CEfinal_train_text</td>
+            <td>
+                <a href="/c/cause-effect-pairs/download/CEfinal_train_text.zip" name="CEfinal_train_text.zip">.zip (33.71 mb)</a>
+            </td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td class="file-name" colspan="2" rowspan="1">SUP3data_text</td>
+            <td>
+                <a href="/c/cause-effect-pairs/download/SUP3data_text.zip" name="SUP3data_text.zip">.zip (542.54 kb)</a>
+            </td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td class="file-name" colspan="2" rowspan="1">basic_python_benchmark_2</td>
+            <td>
+                <a href="/c/cause-effect-pairs/download/basic_python_benchmark_2.csv" name="basic_python_benchmark_2.csv">.csv (124.97 kb)</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="cms-page">
+    <p><strong><strong>This is the July 1, 2013 final data release.&nbsp;</strong></strong></p>
+    <p>The data provided on this page is in csv format, suitable to be read by:</p>
+    <ul>
+        <li><a href="https://github.com/benhamner/CauseEffectPairsChallenge">basic python benchmark</a></li>
+        <li><a href="http://www.causality.inf.ethz.ch/CEdata/Sample_code.zip">Matlab sample code</a></li>
+    </ul>
+    <p><a href="http://www.causality.inf.ethz.ch/CEdata/">Archived data and data in the split format</a> (one pair per file) are also available.</p>
+    <p>The file&nbsp;CEfinal_basic_python_benchmark.csv provides a sample submission.</p>
+    <p>We released the final test data and an equivalent amount of training and validation data distributed similarly. <strong>The test data is encrypted, the decryption key will be revealed at the end of the development phase.</strong> The new validation set is replacing the old validation set on the leaderboard and all the scores are reset to 0.5, please re-submit results on the new validation set. The new data include pairs of variables generated in a similar way as those of SUP2data and pairs of real variables from various sources. The final data is different from the original training and validation data with respect to&nbsp;normalization&nbsp;and&nbsp;quantization&nbsp;of variables to address a problem of bias in the original data.</p>
+    <p><strong>NEW: May-June 2013 supplementary data release:</strong></p>
+    <p>We provide three additional training datasets artificially generated: SUP1data, SUP2data, and SUP3data. Those training datasets have normalized numerical variables and have balanced number of unique values across all classes. SUP1data includes ~6000 pairs of numerical variables. SUP2 includes ~6000 pairs of mixed variables (numerical, categorical, binary). SUP3 data includes 81 pairs of real cause-effect pairs and 81 control pairs A|B and A-B generated from the real pairs.</p>
+    <p><strong>March 2013 data release: <a href="http://www.causality.inf.ethz.ch/CEdata/">archived</a>.</strong></p>
+    <p>In CEfinal_xxx_text.zip, you will find the following files:</p>
+    <ul>
+        <li>CEdata_xx_pairs.csv: the actual data for the A, B pairs.&nbsp;</li>
+        <li>CEdata_xx_publicinfo.csv: information on the type of variables "Numerical", "Binary" or "Categorical".</li>
+        <li>CEdata_train_target.csv: The target values for training data. The second column contains trinary targets +1 for A-&gt;B, -1 for B-&gt;A, 0 otherwise.</li>
+    </ul>
+</div>

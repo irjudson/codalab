@@ -1,0 +1,34 @@
+<h2 class="page-name">
+	Given samples from a pair of variables A, B, find whether A is a cause of B.
+</h2>
+
+<p><strong>August 26: Decryption key of test data released:&nbsp;AL_3CAv2++</strong></p>
+
+<p>Submission deadline: September 2, 2013.</p>
+
+<p><a href="http://clopinet.com/isabelle/Projects/NIPS2013/">Come to our NIPS workshop (dec 9 or 10 in Tahoe)</a>.</p>
+
+<p></p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://kaggle2.blob.core.windows.net/competitions/kaggle/3370/media/cause_effect_page_graphic.png" alt="" height="189" width="340"></p>
+
+<p>The problem of attributing causes to effects is pervasive in science, medicine, economy and almost every aspects of our everyday life involving human reasoning and decision making. What affects your health? the economy? climate changes?&nbsp;The gold standard to establish causal relationships is to perform randomized controlled experiments. However, experiments are costly while non-experimental "observational"&nbsp;data collected routinely around the world are readily available. Unraveling potential cause-effect relationships from such observational data could save a lot of time and effort.</p>
+
+<p>Consider for instance a target variable B, like occurence of "lung cancer" in patients. The goal would be to find whether a factor A, like "smoking", might cause B.&nbsp;The objective of the challenge is to rank pairs of variables {A, B} to prioritize experimental verifications of the conjecture that A causes B.</p>
+
+<p>As is known, "correlation does not mean causation". More generally, observing a statistical dependency between A and B does not imply that A causes B or that B causes A; &nbsp;A and B could be consequences of a common cause. But, is it possible to determine from the joint observation of samples of two variables A and B that A should be a cause of B? There are <a href="http://www.causality.inf.ethz.ch/cause-effect.php?page=help" target="_blank"> new algorithms that have appeared in the literature in the past few years that tackle this problem</a>. This challenge is an opportunity to evaluate them and propose new techniques to improve on them.</p>
+
+<p><em><strong>We provide hundreds of pairs of real variables with known causal relationships from domains as diverse as chemistry,&nbsp;climatology,&nbsp;ecology, economy, engineering, epidemiology,&nbsp;genomics,&nbsp;medicine, physics. and&nbsp;sociology. Those are intermixed with controls (pairs of independent variables and pairs of variables that are dependent but not causally related) and semi-artificial cause-effect pairs (real variables mixed in various ways to produce a given outcome).</strong></em></p>
+
+<p>This challenge is limited to pairs of variables deprived of their context. Thus constraint-based methods relying on conditional independence tests and/or graphical models are not applicable. The goal is to push the state-of-the art in complementary methods, which can eventually disambiguate Markov equivalence classes.&nbsp;If you are skeptical that this is possible, try this quiz: Examine the plot below of values of variable B plotted as a function of values of variable A. Can you guess which one is a cause of the other? Hint: Some non-linear functions are non-invertible.</p>
+
+<p><img title="A causes B?" src="http://www.causality.inf.ethz.ch/images/ABexample.png" alt="quiz examples" style="vertical-align: middle;" height="500" width="515"></p>
+
+<p><img title="Answer: B causes A" src="http://www.causality.inf.ethz.ch/images/answer.png" alt="Quiz answer" style="vertical-align: middle;" height="57" width="500"></p>
+
+<p>July 1: A new data release was made to address a&nbsp;normalization problem&nbsp;and the deadline was extended. Scores on the public leaderboard prior to July 1 were decreased by 0.5. Please make new submissions with the new validation set. The competition is open to new teams.</p>
+
+<p id="end-time-note">
+	<strong>Started:</strong> 7:25 am, Friday 29 March 2013 UTC  <br>
+	<strong>Ended:</strong> 11:59 pm, Monday 2 September 2013 UTC (157 total days)            
+</p>

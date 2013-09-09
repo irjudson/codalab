@@ -1,0 +1,33 @@
+<h2 class="page-name">Evaluation</h2>
+
+<p>For the purpose of this challenge, two variables A and B are causally related if:</p>
+<p>B = f (A, noise) or&nbsp;A = f (B, noise).</p>
+<p>If the former case, A is cause of B and in the latter case B is a cause of A. All other factors are lumped into the "noise". We provide samples of joint observations of A and B, not organized in a time series. We exclude feed-back loops and consider only 4 types of relationships:</p>
+<table border="2" cellpadding="5" cellspacing="5">
+	<tbody>
+		<tr>
+			<td>A-&gt;B</td>
+			<td>&nbsp; &nbsp; &nbsp;A causes B</td>
+			<td>&nbsp; &nbsp; &nbsp;Positive class</td>
+		</tr>
+		<tr>
+			<td>B-&gt;A</td>
+			<td>&nbsp; &nbsp; &nbsp;B causes A</td>
+			<td>&nbsp; &nbsp; &nbsp;Negative class</td>
+		</tr>
+		<tr>
+			<td>A - B</td>
+			<td>&nbsp; &nbsp; &nbsp;A and B are consequences of a common cause</td>
+			<td>&nbsp; &nbsp; &nbsp;Null class</td>
+		</tr>
+		<tr>
+			<td>A | B</td>
+			<td>&nbsp; &nbsp; &nbsp;A and B are independent</td>
+			<td>&nbsp; &nbsp; &nbsp;Null class</td>
+		</tr>
+	</tbody>
+</table>
+<p>We bring the problem back to a classification problem: for each pair of variable {A, B}, you must answer the question: is A a cause of B? (or, since the problem is symmetrical in A and B, is B a cause of A?)</p>
+<p>We expect the participants to produce a score between -Inf and +Inf, large positive values indicating that A is a cause of B with certainty, large negative values indicating that B is a cause of A with certainty.&nbsp;Middle range scores (near zero) indicate that neither A causes B nor B causes A.&nbsp;</p>
+<p>For each pair of variables, we have a ternary truth value indicating whether A is a cause of B (+1), B is a cause of A (-1), or neither (0).&nbsp;We use the scores provided by the participants as a ranking criterion and evaluate their entries with the area under the ROC curve. <a title="Evaluation" href="http://www.causality.inf.ethz.ch/cause-effect.php" target="_blank"> See details</a>.</p>
+<p>We make available Matlab and Python code to produce submissions from the <a title="Data" href="https://www.kaggle.com/c/cause-effect-pairs/data"> data page</a>.&nbsp;</p>

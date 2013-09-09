@@ -1,0 +1,372 @@
+
+
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Contents</h3>
+<a href="#setup">Setup</a> <br>
+<a href="#tasks">Tasks of the challenge</a> <br>
+<a href="#data">Data</a> <br>
+<a href="#evaluation">Evaluation</a> <br>
+<a href="#submissions">Submissions</a> <br>
+<a href="#rules">Rules</a> <br>
+<a href="#help">Help</a> <br><br>
+
+<hr>
+<a name="setup"></a>
+<h3>Setup</h3>
+<hr>
+
+<font face="Helvetica, Arial, sans-serif" size="-1">
+
+	<b>What is the goal of the challenge?</b>
+	<br>
+	The goal is to devise a "coefficient of causation" between two variables A and B, given a number of samples, not time-ordered. The coefficient of causation will take values between -Inf and +Inf, large positive values meaning confidence that A is a cause of B (denoted A-&gt;B) and small negative values meaning confidence that B is a cause of A (denoted B-&gt;A). Values near zero will be interpreted as absence of causal relationship (either A and B are independent (denoted A|B) or A and B are the consequence of a common cause(denoted A-B)). Reciprocal causation (feed-back loop) is not considered. 
+	<br>
+	Examples labeled with truth values (A-&gt;B, B-&gt;A, A-B, or A|B) are provided for training. The participants are then evaluated with predictions made on unlabeled validation and test data. On-line feed-back is provided during the development period using the validation data. The final ranking and prize attribution is done with the test data, released at the end of the development period.
+	<br>
+	<br>
+
+	<b>Are there prizes and travel grant?</b>
+	<br>
+	Yes, there will be free conference registrations, cash prizes and travel grants. See the <a href="?page=rewards">Rewards</a> section.
+	<br>
+	<br>
+
+	<b>Will there be a workshop and proceedings?</b>
+	<br>
+	Yes, we are planning to have 2 workshops, <a href="http://perso.rd.francetelecom.fr/lemaire/IJCNN2013/" target="_blank">one at IJCNN 2013, August 4-9, 2013, Dallas, Texas</a> and one at NIPS 2013, in december 2013  (pending acceptance). The papers will be published in <a href="http://jmlr.csail.mit.edu/proceedings/" target="_blank">JMLR W&amp;CP</a>, the proceedings track of JMLR, and the authors of best papers will be invited to submit a longer version to a special topic of <a href="http://jmlr.csail.mit.edu/" target="_blank">JMLR</a> on experimental design. The papers will be reprinted as a book in the <a href="http://www.mtome.com/Publications/CiML/ciml.html" target="_blank">CiML series of Microtome</a>. For submission deadlines, see the <a href="cause-effect.php?page=rules#schedule">updated schedule</a>.
+	<br>
+	<br>
+
+	<b>Are we obliged to attend the workshop(s) or publish our method(s) to participate in the challenge?</b>
+	<br>
+	Entering the challenge is NOT conditioned on publishing code, methods or attending workshops, however: <br>
+	(1) If you want to be part of the <b>final ranking</b> and become eligible for prizes, you must submit software allowing the organizers to reproduce your results before the deadline, see the <a href="cause-effect.php?page=rules#schedule">updated schedule</a>, following <a href="?page=tasks#software">prescribed guidelines</a>. The code submitted will be kept in confidence by the organizers and used only for validation purposes. You must also fill out a survey (fact sheet) with general information about your method. <br>
+	(2) If you win and wish to accept your prize, you must make your code publicly available under<a href="http://opensource.org/licenses">a popular OSI-approved license</a>, including the training code, and you must submit a 6-page paper to the proceedings. The paper will be peer-reviewed and must be revised to the satisfaction of the reviewers as a condition to obtain the prize. 
+	<br>
+	<br>
+
+	<b>Can I attend  the workshop(s) if I do not participate in the challenge or if I do not qualify for prizes?</b>
+	<br>
+	Yes. You are even encouraged to submit papers for presentation on the topics of the workshops.
+	<br>
+	<br>
+
+	<b>Do I need to register to participate?</b><br>
+	Yes. You can <a href="http://www.causality.inf.ethz.ch/CEdata/" target="_blank">download the data</a> and experiment with the samples code without registering. However, to make submissions you must <a href="https://www.kaggle.com/c/cause-effect-pairs/" target="_blank">register to the Kaggle website</a>. We also ask you to join the <a href="http://groups.google.com/group/causalitychallenge">causalitychallenge Google group</a> to get challenge notifications and workshop announcements.<br>
+	<br>
+
+	<b>Can I register multiple times?</b><br>
+	No. You must make submissions under a single Kaggle user ID. You may be part of a team. Requests may be sent to Kaggle to merge teams.<br>
+	<br>
+
+
+
+</font>
+
+<hr>
+<a name="tasks"></a>
+<h3>Tasks of the challenge</h3>
+<hr>
+
+<font face="Helvetica, Arial, sans-serif" size="-1">
+
+	<b>How do you define causality?</b>
+	<br>
+	For the purpose of this challenge, we consider relationships between pairs of variables {A, B} usually representing aggregate statistics like "life expectancy" of a population or measurements like "temperature". A is a cause of B means that there is a mechanism to generate B from A in the form: B = f (A, noise). Hence there is no explicit time information involved in this definition, even though B "follows from A". You are given a number of pairs of values of A and B and your task is to guess whether B = f (A, noise) or A = f (B, noise) is a plausible model.
+	<br>
+	<br>
+
+	<b>Why should we care about this problem?</b>
+	<br>
+	Uncovering causal relationships is a central problem in science that affects nearly every aspect of our everyday life. What affects your health, the economy, climate changes, and which actions will have desired effects? Those are some of the questions addressed by causal dicovery.
+	<br>
+	<br>
+
+	<b>Aren't there already standard statistical methods to address this problem?</b>
+	<br>
+	The gold standard for evaluating potential causal relationships is the "randomized controlled experiment" in which the influence of a number of factors on a given outcome is tested by "controlling" (assigning given values) to the factors considered and repeating measurements to randomize over uncontrollable or unknown factors. However, conducting experiments is expensive (and sometimes unethical of impossible). Our goal is to limit the number of experiments needed and prioritize them using available "observational data" constantly collected and available at low cost.
+	<br>
+	<br>
+
+	<b>What is the difference between observational and experimental data?</b>
+	<br>
+	Observational data are data collected by an "external agent" not intervening on the system at hand. Experimental data are obtained when an external agent forces some of the variables of the system to assume given values. For example, assume that you are interested in studying the influence of smoking on lung cancer. You may conduct a survey on a sample of the world's population; this is an observational study. Alternatively, you may sample subjects at random and assign them a "treatment": half of the people are forbidden to smoke and half of the people are forced to smoke; this is an experimental study. In the observational study, correlations between smoking and lung cancer may not be revealing of a cause-effect relationship because their may be confounding factors. For example, there may be a genetic factor that makes people both crave for tobacco and increase their risk of lung cancer (common cause). In the experimental study, significant statistical dependencies are a strong suggestion of a causal relationship. Notice that preventing people from smoking may be an expensive experiment; forcing them to smoke would be unethical.
+	<br>
+	<br>
+
+	<b>Aren't there better observational methods using more than 2 variables?</b>
+	<br>
+	Using more than two variables, you can conduct conditional independence tests, which allow you to eventually draw stronger conclusions about causal relationships. However, such tests require a lot of data to reach statistical significance. For instance, if you have binary variables, every time you condition on a new variable, you need twice as much data to reach the same level of confidence. Furthermore, you need to assume that you know "all" the relevant variable in your system (causal sufficiency). So there is a lot of value to see how far we can go with only two variables.
+	<br>
+	<br>
+
+
+	<b>Can this problem be solved at all?</b>
+	<br>
+	The high AUC on the leaderboard after one month of competition is very promising. We checked that high scores are obtained both on real and artificial data among high ranking participants.
+	<br>
+	<br>
+
+	<b>What applications do you have in mind?</b>
+	<br>
+	Mining publicly available data in chemistry,&nbsp;climatology,&nbsp;ecology, economy, engineering, epidemiology,&nbsp;genomics,&nbsp;medicine, physics. and&nbsp;sociology, to identify previously unknown potential cause-effect relationships deserving attention.
+	<br>
+	<br>
+
+	<b>Why are there no time series?</b><br>
+	Using time poses different problems. We will introduce time series in an upcoming challenge.
+	<br><br>
+
+	<b>Can I submit time series data in track 1?</b><br>
+	Not for this challenge. The data need to be similar to the data provided by the organizers for the challenge.
+	<br><br>
+
+	<b>Is there a minimum of data I need to submit in track 1?</b><br>
+	No. However, we recommend to submit as many pairs as possible and at least 10. For each pair, there should preferably be more than 100 samples. In the data provided by the organizers, the pairs have between 500 and 5000 samples.
+	<br><br>
+
+	<b>Can you give me clues on how to get started?</b><br>
+	We provide sample code and papers in the <a href="?page=help">Help</a> section. There is also a <a href="http://clopinet.com/isabelle/Projects/causality/CauseEffectPairs_may1_2013.pptx">powerpoint presentation with voice over</a>.
+	<br><br>
+
+	<b>What are typical methods?</b><br>
+	A <a href="http://www.biomedcentral.com/1471-2164/13/S8/S22/table/T1">list of typical methods</a> and their properties is found in the <a href="http://www.biomedcentral.com/1471-2164/13/S8/S22">BMC genomics paper by Stanikov et al</a>. Some examples of the following approaches are found in the  <a href="http://clopinet.com/isabelle/Projects/causality/CauseEffectPairs_may1_2013.pptx">powerpoint presentation</a>:
+	<ul>
+		<li> <b>Additive noise models (ANM) and their derivatives like the post-non-linear models (PNL)</b> that fit the data in two ways A=f(B,noise) and B=f(A,noise) and decide on the causal direction based on the goodness of fit, the independence of the residual (noise) and the input, and the complexity of the model. Under the assumptions of the models, cause-effect directions can be identified given enough samples if some condition are fulfilled like: the function is non invertible, the noise or the input is non Gaussian, or if the function in non-linear and there is some additive noise not necessarily non Gaussian. See slides 15-20.
+		</li><li> <b>Latent variable models (e.g. LINGAM)</b>. All factors (variables) interacting with A or B are considered latent variables (not just "noise") and several models are fitted with maximum likelihood, under some constraints (e.g. the input and the latent variable are independent). The causal direction favored is that correponding to the model provising the best compromise fit/complexity. See slide 21.
+	</li><li> <b>Information theoretic approaches (GPI and IGCI)</b>. The two factorizations of P(A, B) are compared P(A|B)P(B) and P(B|A)P(A). The least complex explanation of the data is favored. Equivalently the model corresponding to an independence between input distribution and mechanism to produce the output is favored. See slides 24-26.
+</li></ul>
+<br>
+
+</font>
+
+<hr>
+<a name="data"></a>
+<h3>Data</h3>
+<hr>
+
+<font face="Helvetica, Arial, sans-serif" size="-1">
+	<b>Are the datasets using real data?</b>
+	<br>
+	Partially.
+	<br>
+	<br>
+
+	<b>How did you determine the truth values?</b>
+	<br>
+	For artificial pairs, they are given by the data generating process. For real pairs, we used the identity of the variables. Some variables are intrinsically "exogenous" and cannot be manipulated such as "age", so they are assumed to be causes. Some variables are known causes or known effects.
+	<br>
+	<br>
+
+	<b>Are there categorical variables?</b><br>
+	Yes. There are numerical, categorical, and binary variables.
+	<br><br>
+
+	<b>Why did you include independent variables?</b><br>
+	Arguably the problem of determining whether two variables are independent is not a "causal" problem because "correlation does not mean causation" or more generally two statistically dependent variables are not necessarily causally related (there many be, for instance, a common cause explaining the dependency). However, our goal is to find a "coefficient of causation" of two variables A and B with large positive values for A causes B, small negative values for B causes A, and values near zero for other cases. Those other cases include independent variables. <br>
+	Determining independence is a well studied problem. There exist many statistics measuring independence. One of them is the well know <a href="http://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient">Pearson correlation coefficient</a>. However, this coefficient may be used only between two numerical variables and it does not capture all types of dependencies. The Hilbert-Schmidt independence criterion (<a href="http://www.wikicoursenote.com/wiki/Measuring_Statistical_Dependence_with_Hilbert-Schmidt_Norm">HSIC</a>) generalizes the Pearson correlation coefficient to complex non-linear dependencies using the "alignment" between two kernel matrices K=[k(xi, xj)] and L=[l(yi, yj)] (HSIC = sum of the element by element product of K and L or equivalently Tr(KL), for centered kernels). For one categorical and one numerical variable, you may use the <a href="http://en.wikipedia.org/wiki/ANOVA">ANOVA test</a> or the <a href="http://en.wikipedia.org/wiki/Kruskal–Wallis_one-way_analysis_of_variance">Kruskal-Wallis test</a>. For two categorical variables, you may use the <a href="http://stattrek.com/chi-square-test/independence.aspx">Chi-squared test</a>.
+	<br><br>
+
+	<b>Why did you hide the identity of the variables?</b><br>
+	We do not want people to make guesses based on the identity of the variables.
+	<br><br>
+
+	<b>How easy would it be to identify the causal relationship by eyeballing the data?</b><br>
+	For some pairs it is easy, but for most pairs it is hard or impossible.
+	<br><br>
+
+	<b>Why did you release additional data?</b>
+	<br>
+	We released supplementary data (SUP1-3) and final data (CEfinal) that addressed a data normalization and quantization problem introducing a potential bias for some of the causal classes. CEfinal contains a mix of real and artificial data. SUP1data and SUP2data are artificially generated. SUP3data include real pairs and semi-artificial A-B pairs. The supplementary data may be used as additional training data. Training is not limited to data provided.
+	<br><br>
+
+	<b>How are the data normalized?</b>
+	<br>
+	The variables are standardized (subtract mean and divide by standard deviation), multiplied by 10000, then rounded. The data formatting also ensures a similar distribution of the number of unique values of variables accross the various classes.
+	<br><br>
+
+
+	<b>How is final test data distributed?</b>
+	<br>
+	The final training, validation, and test data are distributed similarly and includes two types pairs of variables:
+	(1) artificial data generated in a similar way as those of SUP2data and (2) pairs of real variables from various sources. The final data is different from the original data release with respect to <b>normalization</b> and <b>quantization</b> of variables.&nbsp;See the <a href="cause-effect.php?page=FAQ">data page</a> for details.<br>
+	<br>
+
+	<b>Are the classes balanced?</b>
+	<br>
+	There is a relatively balanced proportion on A-&gt;B, B-&gt;A, A|B, and A-B, but they are not exactly identical. The number of samples per variable pair is distributed similarly in all 4 classes. The quantization of variables is distributed similarly in all 4 classes in the supplementary and final data, NOT in the original TRAIN and VALID sets.  
+	<br>
+	<br>
+
+
+
+</font>
+
+<hr>
+<a name="evaluation"></a>
+<h3>Evaluation</h3>
+<hr>
+
+<font face="Helvetica, Arial, sans-serif" size="-1">
+
+	<b>What is the meaning of the score on the leaderboard?</b><br>
+	The score is the average of two AUCs rating the classification accuracy for separating "A-&gt;B" from all the other cases and for separating "B-&gt;A" from all the other cases. See the <a href="?page=tasks#scoring">score definition</a>.
+	<br>
+	<br>
+
+	<b>Why did you not consider a four class problem?</b><br>
+	Because it is practically attractive to have a coefficient of causation that can be used to rank pairs and prioritize experiments.
+	<br>
+	<br>
+	<b>Doesn't the score chosen force us to solve a harder problem than needed?</b><br>
+	Not necessarily. It imposes that the symmetry of the problem in A and B be exploited.
+	<br>
+	<br>
+
+	<b>How can we compute a statistic satisfying your requirements?</b><br>
+	One way is to create a score rating the likelihood of A-&gt;B and another rating B-&gt;A then make the difference between them. Another way is to extract features of the distribution of A and B values and train a classifier to separate A-&gt;B from B-&gt;A, leaving a margin on either side of decision boundary in which other cases (A|B and A-B) are forced to live. Because of the symmetry of the problem, you can get twice as many examples for A-&gt;B and B-&gt;A by swapping the roles of A and B.
+	<br>
+	<br>
+
+	<b>Will the results on the validation set or on data provided by the participants count for the final ranking?</b><br>
+	No. The final ranking will be computed only on test data provided by the organizers.
+	However, a number of statistics will be computed on all the data (including validation data and data provided by the participants) and you may report these results in your paper submitted to the workshop.<br><br>
+
+</font>
+
+<hr>
+<a name="submissions"></a>
+<h3>Submissions</h3>
+<hr>
+
+<font face="Helvetica, Arial, sans-serif" size="-1">
+
+	<b>How many submissions can I make?</b>
+	<br>
+	You may not make more than 5 submissions per day. You may select up to three final submission. <br>
+	<br>
+
+	<b>Can I make experiments with  mixed methods? </b><br>
+	We encourage you to use a single unified methodology. However, we acknowledge that, since there are different types of variables (numerical, categorical, continuous), the problems are very different in nature and may require adjustments or changes in strategy, so we do not impose that you use strictly the same method for all cases.
+	<br>
+	<br>
+
+	<b>Can I submit a method involving no learning at all? </b><br>
+	Yes. 
+	<br>
+	<br>
+
+	<b>Can I submit results involving human classification? </b><br>
+	No. This is a challenge about automatic machine-made predictions. However, if you want to provide human classification results, please contact us and we will report them for comparison.
+	<br><br>
+
+
+	<b>How do I prepare the software that I will submit?</b><br>
+	We provided <a href="?page=tasks#software">instructions for preparing your code</a>.
+	You must submit your software together with your selected submission(s) on validation data before the software submission deadline (see the <a href="cause-effect.php?page=rules#schedule">updated schedule</a>). If you intend to make more than one final submission (up to three are permitted), you must provide unambiguous instructions with your software so the organizers can match your software versions or options to the submissions made. 
+	<br><br>
+
+	<b>How do I submit final results?</b><br>
+	After the software submission deadline, we will release the decryption key for the final test data. You will then have about a week to run your software and turn in prediction results (see the <a href="cause-effect.php?page=rules#schedule">updated schedule</a>). The prediction results must be generated with the software that you submitted.
+	<br><br>
+
+	<b>How will the organizers carry out the verifications?</b><br>
+	The burden of proof rests on the participants. Hence the participants are responsible for providing all necessary software components to the organizers so they can reproduce their results. Standard hardware and OS must be used (laptop or desktop computers running Windows, Linux or MacOS). The interface must be similar to that of the sample code. <b>The participants are advised to provide a preliminary version of their code for testing ahead of the deadline to make sure that it runs smoothly.</b>
+	<br>
+	The organizers will run your software on the final test data and compare the score obtained with the score of your final submission(s). You will be informed of any discrepancy and the organizers will attempt to troubleshoot the problem with you. However, if the difference alters the ranking of participants, the results obtained by the organizers using the software provided will prevail.
+	<br>
+	To ensure result reproducibility, we recommend that you eliminate any stochastic component from your software and, in particular, initialize pseudo-random number generators always in the same way to produce the exact same results every time the software it run.
+	<br><br>
+
+
+	<b>Do I have to submit results on the final test set even though I provide my software? </b><br>
+	Yes. This will allow us to verify that we ran your code properly.
+	<br><br>
+
+
+
+	<b>Do I have to provide source code? </b><br>
+	Not necessarily. Only the winners will be required to make their source code publicly available if they want to claim their prize.
+	<br><br>
+
+	<b>Do I have to provide the training software or only the prediction software? </b><br>
+	The participants need only to upload software to make predictions on the final validation and test data.  Only the winners will be asked to make publicly available the source code of their full software package under <a href="http://opensource.org/licenses">a popular OSI-approved license</a>, including training software, to be able to claim their prize. 
+	<br><br>
+
+</font>
+
+<hr>
+<a name="rules"></a>
+<h3>Rules</h3>
+<hr>
+
+<font face="Helvetica, Arial, sans-serif" size="-1">
+
+	<b>The rules specify I will have to fill out a fact sheet to be part of the final ranking, do you have information about that fact sheet? </b>
+	<br>
+	You will have to fill out a multiple choice question form that will be sent to you when the challenge is over. It will include high level questions about the method you used, software and hardware platform. Details or proprietary information may be withheld and the participants retain all intellectual property rights on their methods. <br><br>
+
+	<b>Will the information of the fact sheets be made public? </b>
+	<br>
+	Yes. <br><br>
+
+
+	<b>Do I need to let you know what my method is? </b>
+	<br>
+	Disclosing detailed information about your method is optional unless you are one of the winners and want to claim your prize. The winners will have to produce a 6-page paper for the proceedings. <br><br>
+
+	<b>To get my prize, does my paper need to be accepted? </b>   <br>
+	Yes. Your paper will be peer reviewed and must be accepted. You will get the opportunity of revising it to the satisfaction of the reviewers.
+	<br><br>
+
+	<b>How will papers be judged? </b>   <br>
+	The reviewers will use five criteria: (1) <b>Impact</b> (track 1) or <b>Performance</b> in challenge (track 1), (2) <b>Novelty/Originality</b>, (3) <b>Sanity</b>, (4) <b>Insight</b>, and (5) <b>Clarity</b> of presentation. In track 1 (data donation), "Impact" means the scientific, technical, and/or societal impact of the cause-effect relationships discovered through the challenge (preferably validated a posteriori). In track 2 (submission of methods), "Performance" means verified final challenge performance results on test data (see <a href="cause-effect.php?page=rules#Reproducibility">reproducibility</a>).
+	<br><br>
+
+	<b>How will the best paper awards be attributed?</b> <br>
+	Best paper awards will distinguish
+	papers with principled, original, and effective methods, and with a clear demonstration of the advantages of the method via theoretical derivations and well designed experiments. <br><br>
+
+	<b>Can prizes be cumulated?</b><br>
+	Yes, you can enter both track and cumulate your prizes if you with in both tracks. You can also cumulate you prize in track 2 and a best paper award. <br><br>
+
+	<b>Will the organizers enter the  competition? </b><br>
+	The prize winners may not be challenge organizers.
+	The challenge organizers will enter benchmark submissions from time
+	to time to stimulate participation, but these do not count as competition entries. <br><br>
+
+	<b>Can I give an arbitrary hard time to the organizers? </b><br>
+
+	ALL INFORMATION, SOFTWARE, DOCUMENTATION,
+	AND DATA ARE PROVIDED "AS-IS". ISABELLE GUYON, CHALEARN, KAGGLE AND/OR OTHER ORGANIZERS
+	DISCLAIM ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+	TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR ANY PARTICULAR
+	PURPOSE, AND THE WARRANTY OF NON-INFRIGEMENT OF ANY THIRD PARTY'S INTELLECTUAL
+	PROPERTY RIGHTS. IN NO EVENT SHALL ISABELLE GUYON AND/OR OTHER ORGANIZERS
+	BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY
+	DAMAGES WHATSOEVER ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
+	OF SOFTWARE, DOCUMENTS, MATERIALS, PUBLICATIONS, OR INFORMATION MADE AVAILABLE
+	FOR THE CHALLENGE. <br>
+	In case of dispute about prize attribution or possible exclusion from the competition, the participants agree not to take any legal action against the organizers, CHALEARN, KAGGLE, or data donors. Decisions can be appealed by submitting a letter to <a href="http://perso.rd.francetelecom.fr/lemaire/">Vincent Lemaire</a>, secretary of ChaLearn, and disputes will be resolved by the board of ChaLearn.
+	<br><br>
+
+</font>
+
+<hr>
+<a name="help"></a>
+<h3>Further help</h3>
+<hr>
+
+<font face="Helvetica, Arial, sans-serif" size="-1">
+
+	Help for may be obtained by writing to the <a href="https://www.kaggle.com/c/cause-effect-pairs/forums">Kaggle website forum</a> or emailing the organizers to <u><b><i>causality</i>@chalearn</b>.org</u>. See also the <a href="?page=help">Help</a> page.
+
+
+</font>
+<p>
+
+	<i>Last updated August 8, 2013.</i>
+
+</p>
