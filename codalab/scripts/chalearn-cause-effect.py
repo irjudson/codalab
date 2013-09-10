@@ -49,7 +49,6 @@ chalearn_ce,_ = Competition.objects.get_or_create(title=chalearn_ce_name, creato
 details_category = ContentCategory.objects.get(name="Learn the Details")
 participate_category = ContentCategory.objects.get(name="Participate")
 pc,_ = PageContainer.objects.get_or_create(object_id=chalearn_ce.id, content_type=ContentType.objects.get_for_model(Competition))
-chalearn_ce.pagecontent = pc
 chalearn_ce.save()
 
 Page.objects.get_or_create(category=details_category, container=pc,  codename="overview",
