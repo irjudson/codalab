@@ -68,11 +68,8 @@ brats2013.image = File(open(os.path.join(os.path.dirname(__file__), "brats2013",
 brats2013.save()
 
 # Phases for the competition
-day_delta = datetime.timedelta(days=30)
-p1date = timezone.make_aware(datetime.datetime.combine(datetime.date(2012, 7, 6), datetime.time()), timezone.get_current_timezone())
-p2date = timezone.make_aware(datetime.datetime.combine(datetime.date(2012, 10, 1), datetime.time()), timezone.get_current_timezone())
-p1date = timezone.make_aware(datetime.datetime.combine(datetime.date(2013, 7, 15), datetime.time()), timezone.get_current_timezone())
-p2date = timezone.make_aware(datetime.datetime.combine(datetime.date(2013, 8, 30), datetime.time()), timezone.get_current_timezone())
+p1date = timezone.make_aware(datetime.datetime.combine(datetime.date(2013, 8, 30), datetime.time()), timezone.get_current_timezone())
+p2date = timezone.make_aware(datetime.datetime.combine(datetime.date(2013, 9, 22), datetime.time()), timezone.get_current_timezone())
 p, created = CompetitionPhase.objects.get_or_create(competition=brats2013, phasenumber=1, label="Training Phase",
                                                                                                         start_date=p1date, max_submissions=20)
 p, created = CompetitionPhase.objects.get_or_create(competition=brats2013, phasenumber=2, label="Competition Phase",
@@ -195,7 +192,7 @@ status,cr = ParticipantStatus.objects.get_or_create(codename="approved")
 participants = [("Keyvan Farahani", "farahank@mail.nih.gov", "C0daLab$kf"),
                 ("Bjoern Menze", "bjoern@ethz.ch", "C0daLab$bm"),
                 ("Mauricio Reyes", "mauricio.reyes@istb.unibe.ch", "C0daLab$mr"),
-                ("Elizabeth Gerstner", "NA", "C0daLab$eg"),
+                ("Elizabeth Gerstner", "egerstner@partners.org", "C0daLab$eg"),
                 ("Justin Kirby", "kirbyju@mail.nih.gov", "C0daLab$jk"),
                 ("Jayashree Kalpathy-Cramer", "kalpathy@nmr.mgh.harvard.edu", "C0daLab$jkc"),
                 ("Raphael Meier", "raphael.meier@istb.unibe.ch", "C0daLab$rm"),
