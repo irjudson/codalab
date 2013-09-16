@@ -99,34 +99,31 @@ for phase in CompetitionPhase.objects.filter(competition=brats2013):
 groups = {}
 
 gorder = 1
-for g in ({'key': 'patient', 'label': 'Patient Data'},
-    {'key': 'synthetic', 'label': 'Synthetic Data'},
-    ):
+for key, label in [['brats2013_patient', 'Patient Data'],
+                   ['brats2013_synthetic','Synthetic Data']]:
   rg,cr = SubmissionResultGroup.objects.get_or_create(competition=brats2013,
-                  key=g['key'],
-                  defaults=dict(label=g['label'],
-                    ordering=gorder),
-                  )
+                  key=key, label=label, ordering=gorder)
   gorder=gorder+1
+
   for gp in brats2013.phases.all():
     rgp,crx = SubmissionResultGroupPhase.objects.get_or_create(phase=gp, group=rg)
   groups[rg.key] = rg
 
 for sdg in ( 
-        ('synthetic',({'Dice': {'subs': (('SyntheticDiceComplete','Complete'),('SyntheticDiceCore','Core'))  } },
+        ('brats2013_synthetic',({'Dice': {'subs': (('SyntheticDiceComplete','Complete'),('SyntheticDiceCore','Core'))  } },
                       {'Sensitivity': {'subs': (('SyntheticSensitivityComplete','Complete'),('SyntheticSensitivityCore','Core'))  }},
                       {'Specificity': {'subs': (('SyntheticSpecificityComplete','Complete'),('SyntheticSpecificityCore','Core')) }},
                       {'Hausdorff': {'subs': (('SyntheticHausdorffComplete','Complete'),('SyntheticHausdorffCore','Core'))}},
                       {'Kappa': {'def':  ('SyntheticKappa','Kappa')}},
-                      {'Rank': { 'computed': {'operation': 'Avg', 'key': 'synthetic_dice_rank', 'label': 'Rank', 'fields': ('SyntheticDiceComplete','SyntheticDiceCore')}}}) 
+                      {'Rank': { 'computed': {'operation': 'Avg', 'key': 'brats2013_synthetic_dice_rank', 'label': 'Rank', 'fields': ('SyntheticDiceComplete','SyntheticDiceCore')}}}) 
          ) ,
 
-        ('patient',({'Dice': {'subs': (('PatientDiceComplete','Complete'),('PatientDiceCore','Core'),('PatientDiceEnhancing','Enhancing'))  } },
+        ('brats2013_patient',({'Dice': {'subs': (('PatientDiceComplete','Complete'),('PatientDiceCore','Core'),('PatientDiceEnhancing','Enhancing'))  } },
                     {'Sensitivity': {'subs': (('PatientSensitivityComplete','Complete'),('PatientSensitivityCore','Core'),('PatientSensitivityEnhancing','Enhancing'))  }},
                     {'Specificity': {'subs': (('PatientSpecificiyComplete','Complete'),('PatientSpecificiyCore','Core'),('PatientSpecificiyEnhancing','Enhancing')) }},
                     {'Hausdorff': {'subs': (('PatientHausdorffComplete','Complete'),('PatientHausdorffCore','Core'),('PatientHausdorffEnhancing','Enhancing'))}},
                     {'Kappa': {'def':  ('PatientKappa','Kappa')}},
-                    {'Rank': { 'computed': {'operation': 'Avg', 'key': 'patient_dice_rank', 'label': 'Rank', 'fields': ('PatientDiceComplete','PatientDiceCore','PatientDiceEnhancing')}}})  ),
+                    {'Rank': { 'computed': {'operation': 'Avg', 'key': 'brats2013_patient_dice_rank', 'label': 'Rank', 'fields': ('PatientDiceComplete','PatientDiceCore','PatientDiceEnhancing')}}})  ),
            ):
         
 
@@ -153,29 +150,21 @@ for sdg in (
                       defaults=dict(label=label))
                                         for sub in defs:
                                                 print "SUB",sub
-                                                
-
                                                 sd,cr = SubmissionScoreDef.objects.get_or_create(competition=brats2013,key=sub[0],
-                         defaults=dict(label=sub[1]))
+                                                                                                 defaults=dict(label=sub[1]))
                                                 sdg0,cr = SubmissionScoreDefGroup.objects.get_or_create(scoredef=sd,group=groups[rgroup])
                                                 fields[sd.key] = sd
-
                                                 print " CREATED DEF", sd.key, sd.label
-                                                #for p in brats2013.phases.all():
-                                                #        sp,cr = SubmissionScorePhase.objects.get_or_create(scoredef=sd,phase=p)
-                                                #        print "   ADDED TO PHASE"
-
-                                                g2,cr = SubmissionScoreSet.objects.get_or_create(parent=g,
-                         key=sub[0],
-                         competition=brats2013,
-                         defaults=dict(scoredef=sd,label=sub[1]))
+                                                g2,cr = SubmissionScoreSet.objects.get_or_create(parent=g, key="brats2013_%s" % sub[0],
+                                                                                                 competition=brats2013,
+                                                                                                 defaults=dict(scoredef=sd,label=sub[1]))
                                                 print " SUB GROUP", g2.label,g2.scoredef.key,g2.scoredef.label
 
                                 elif t == 'def':
                                         g,cr = SubmissionScoreSet.objects.get_or_create(key="%s%s" % (rgroup,label),
                                                                                           competition=brats2013, defaults=dict(label=defs[1]))
                                         sd,cr = SubmissionScoreDef.objects.get_or_create(competition=brats2013,
-                                                                                         key=defs[0],
+                                                                                         key="brats2013_%s" % defs[0],
                                                                                          defaults = dict(label=defs[1]))
                                         sdg0,cr = SubmissionScoreDefGroup.objects.get_or_create(scoredef=sd,group=groups[rgroup])
                                         fields[sd.key] = sd
@@ -218,7 +207,21 @@ participants = [("Keyvan Farahani", "farahank@mail.nih.gov", "C0daLab$kf"),
                 ("Patricia Buendia", "paty@infotechsoft.com", "C0daLab$pb"),
                 ("Xiaotao Guo", "xg2145@columbia.edu", "C0daLab$xg"),
                 ("Liang Zhao", "lzhao6@buffalo.edu", "C0daLab$lz"),
-                ("Senan Doyle", "senan.doyle@gmail.com", "C0daLab$sd")]
+                ("Senan Doyle", "senan.doyle@gmail.com", "C0daLab$sd"),
+                ("Hongzhi Wang", "hongzhiw@mail.med.upenn.edu", "C0daLab$hw"),
+                ("Anant Madabhushi", "anantm@case.edu", "C0daLab$am"),
+                ("Carlos Silva", "csilva@dei.uminho.pt", "C0daLab$cs"),
+                ("Herve Delingette", "Herve.Delingette@inria.fr", "C0daLab$hd"),
+                ("Nick Tustison", "NJT4N@virginia.edu", "C0daLab$nt"),
+                ("Xiaotao Guo", "xg2145@columbia.edu", "C0daLab$xg"),
+                ("Eric Chang", "eric.chang@microsoft.com", "C0daLab$ec"),
+                ("Xiaojie Huang", "xiaojie.huang@yale.edu", "C0daLab$xh"),
+                ("Raphael Meier", "raphael.meier@istb.unibe.ch", "C0daLab$rm"),
+                ("Stefan Bauer", "stefan.bauer@istb.unibe.ch", "C0daLab$sb"),
+                ("Liang Zhao", "lzhao6@buffalo.edu", "C0daLab$lz"),
+                ("Sergio Pereira", "a55586@alunos.uminho.pt", "C0daLab$sp"),
+                ("Duygu Sarikaya", "s_duygu@hotmail.com", "C0daLab$ds"),
+                ("Simon Mercer", "simon.mercer@microsoft.com", "C0daLab$sm")]
 
 for p_name, p_email, p_pass in participants:
   user,cr = User.objects.get_or_create(email=p_email, username=p_email)

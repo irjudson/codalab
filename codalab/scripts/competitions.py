@@ -30,7 +30,10 @@ User = get_user_model()
 start_date = timezone.now()
 
 # Get a user to be the creator
-guest1 = User.objects.get(username="guest1")
+guest1,cr = User.objects.get_or_create(username="guest1",email="guest1@live.com")
+if cr:
+    guest1.set_password("abc123")
+    guest1.save()
 
 #
 #  Start BRaTS 2012 ----

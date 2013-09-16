@@ -34,6 +34,9 @@ venv/*/*
 *.pot
 *.pyc
 
+**/build/**
+**/dist/**
+
 # Editor backup files #
 #######################
 *~
