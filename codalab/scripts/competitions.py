@@ -50,22 +50,22 @@ brats2012.save()
 
 Page.objects.get_or_create(category=details_category, container=pc,  codename="overview",
                            defaults=dict(label="Overview", rank=0,
-                                         html=open(os.path.join(os.path.dirname(__file__), "brats2012_overview.html")).read()))
+                                         html=open(os.path.join(os.path.dirname(__file__), "brats2012/brats2012_overview.html")).read()))
 Page.objects.get_or_create(category=details_category, container=pc,  codename="evaluation", 
                            defaults=dict(label="Evaluation", rank=1,
-                                         html=open(os.path.join(os.path.dirname(__file__), "brats2012_evaluation.html")).read()))
+                                         html=open(os.path.join(os.path.dirname(__file__), "brats2012/brats2012_evaluation.html")).read()))
 Page.objects.get_or_create(category=details_category, container=pc,  codename="terms_and_conditions",
-                    defaults=dict(rank=2, label="Terms and Conditions", html=open(os.path.join(os.path.dirname(__file__), "brats2012_terms_and_conditions.html")).read()))
+                    defaults=dict(rank=2, label="Terms and Conditions", html=open(os.path.join(os.path.dirname(__file__), "brats2012/brats2012_terms_and_conditions.html")).read()))
 
 Page.objects.get_or_create(category=details_category, container=pc,  codename="faq",
-                           defaults=dict(label="FAQ", rank=3, html=open(os.path.join(os.path.dirname(__file__), "brats2012_faq.html")).read()))
+                           defaults=dict(label="FAQ", rank=3, html=open(os.path.join(os.path.dirname(__file__), "brats2012/brats2012_faq.html")).read()))
 Page.objects.get_or_create(category=details_category, container=pc,  codename="key_dates",
-                           defaults=dict(label="Key Dates", rank=4, html=open(os.path.join(os.path.dirname(__file__), "brats2012_key_dates.html")).read()))
+                           defaults=dict(label="Key Dates", rank=4, html=open(os.path.join(os.path.dirname(__file__), "brats2012/brats2012_key_dates.html")).read()))
 Page.objects.get_or_create(category=details_category, container=pc,  codename="organizers",
-                           defaults=dict(label="Organizers", rank=5,html=open(os.path.join(os.path.dirname(__file__), "brats2012_organizers.html")).read()))
+                           defaults=dict(label="Organizers", rank=5,html=open(os.path.join(os.path.dirname(__file__), "brats2012/brats2012_organizers.html")).read()))
 
 Page.objects.get_or_create(category=participate_category, container=pc,  codename="get_data",
-                    defaults=dict(label="Get Data", rank=0, html=open(os.path.join(os.path.dirname(__file__), "brats2012_data.html")).read()))
+                    defaults=dict(label="Get Data", rank=0, html=open(os.path.join(os.path.dirname(__file__), "brats2012/brats2012_data.html")).read()))
 Page.objects.get_or_create(category=participate_category, container=pc,  codename="submit_results", html="", defaults=dict(label="Submit Results", rank=1))
 
 # Logo
