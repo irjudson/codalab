@@ -4,6 +4,22 @@
 {% block page_title %}Competition{% endblock page_title %}
 
 {% block content %}
+<div class="row competitionOperations">
+    <div class="large-12 columns">
+        {% if user == competition.creator %}
+            {% if not competition.published %}
+                <span data-tooltip class="has-tip right" title="Delete this competition."><a class="right" href="{% url 'competitions:delete' pk=competition.pk %}"><i class="fi-trash large competition-operation"></i></a></span>
+            {% endif %}
+        {% if not competition.published %}
+            <span data-tooltip class="has-tip right" title="Publish this competition."><a class="right" href="{% url 'competition-publish' pk=competition.pk %}"><i class="fi-share large competition-operation"></i></a></span>
+        {% else %}
+            <span data-tooltip class="has-tip right" title="Unpublish this competition."><a class="right" href="{% url 'competition-unpublish' pk=competition.pk %}"><i class="fi-prohibited large competition-operation"></i></a></span>
+        {% endif %}
+        <span data-tooltip class="has-tip right" title="Manage participants for this competition."><a class="right" href="{% url 'my_competition_participants' competition_id=competition.pk %}"><i class="fi-torsos large competition-operation"></i></a></span>
+        <span data-tooltip class="has-tip right" title="Edit this competition."><a class="right" href="{% url 'competitions:edit' pk=competition.pk %}"><i class="fi-widget large competition-operation"></i></a></span>
+        {% endif %}
+    </div>
+</div>
 <div class="row">
     <div class="large-12 large-centered columns">
         <div class="CompetitionsDetailContainer">

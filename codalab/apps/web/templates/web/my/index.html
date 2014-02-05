@@ -5,6 +5,15 @@
 
 {% block content %}
 <div class="row">
+    <div class="large-12 columns">
+        <a href="#" data-dropdown="drop1" class="button small dropdown right"><i class="fi-plus large"></i></a><br/>
+        <ul id="drop1" class="f-dropdown right">
+            <li><a href="{% url 'competitions:create' %}">Create Competition</a></li>
+            <li><a href="#">Create  Experiment</a></li>
+        </ul>
+    </div>
+</div>
+<div class="row">
 <div class="large-10 large-offset-1 columns centered">
   {% for competition in my_competitions %}
     <div class="competition-tile">
@@ -34,13 +43,6 @@
               </div>
             </div>
           </a>
-          <div id="competition-actions" published="{{competition.published}}" class="small-10 columns cursor-default myCompetitionButtons">
-            <a id="competition-delete-button" href="{% url 'competitions:delete' pk=competition.pk %}"><button class="secondary button">Delete</button></a>
-            <a href="{% url 'competitions:edit' pk=competition.pk %}"><button class="secondary button">Edit</button></a>
-            <button value="{% url 'competition-publish' pk=competition.pk %}" id="competition-publish-button" class="secondary button">Publish</button>
-<!--            <button value="{% url 'competition-unpublish' pk=competition.pk %}" id="competition-unpublish-button" class="secondary button">Unpublish</button> -->
-            <a href="{% url 'my_competition_participants' competition_id=competition.pk %}"><button class="secondary button">Participants</button></a>
-         </div>
        </div>
      </article>
     </div>                

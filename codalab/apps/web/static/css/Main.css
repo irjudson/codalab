@@ -19,9 +19,6 @@ address,caption,cite,code,dfn,em,strong,th,var {
 	font-style:normal;
 	font-weight:normal;
 }
-/*ol,ul,li {
-	list-style:none;
-}*/
 caption,th {
 	text-align:left;
 }
@@ -48,8 +45,6 @@ textarea:focus, input:focus{
 table, tr, td {
     border-collapse:collapse;
 }
-/*css reset--------------------------------------*/
-
 /*common-----------------------------------------*/
 .lFloat {float:left !important}
 .rFloat {float:right !important}
@@ -353,21 +348,6 @@ input[type="submit"][value="Delete"]
     right:10px;
     top:16px;
 }
-/*.buttonAccept,.buttonReject
-{
-    padding:5px 11px;
-    background:#74d825;
-    float:left;
-    font:normal 13px 'Segoe UI', Segoe, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    display:inline-block;
-    color:#fff !important;
-    cursor:pointer;
-    margin-left:10px;
-}
-.buttonReject
-{
-    background:#f1702f;
-}*/
 .tabButton{
     background:#d57900 ;
     padding:10px 35px;
@@ -587,6 +567,11 @@ input[type="submit"][value="Delete"]
 }
 .competitionUserBlock .subContainerPadding p {
     padding-bottom:0;
+}
+.competition-operation {
+    color: #676278;
+    padding-right: 10px;
+    font-size: 24px;
 }
 /*Container----------------------------------------*/
 .bodyContainer{
