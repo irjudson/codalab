@@ -10,6 +10,7 @@ class CompetitionForm(forms.ModelForm):
         model = models.Competition
         fields = ('title', 'description', 'image', 'has_registration', 'end_date', 'published')
         widgets = { 'description' : forms.Textarea(attrs={'rows' : 20, 'class' : 'competition-editor-description'}) }
+
 class CompetitionPhaseForm(forms.ModelForm):
     class Meta:
         model = models.CompetitionPhase
@@ -21,11 +22,6 @@ class PageForm(forms.ModelForm):
         model = models.Page
         fields = ('html',)
         widgets = { 'html' : forms.Textarea(attrs={'rows' : 20, 'class' : 'competition-editor-page-html' }) }
-
-class PageForm(forms.ModelForm):
-    class Meta:
-        model = models.Page
-        fields = ('label', 'rank', 'visibility', 'html' )
 
 class CompetitionDatasetForm(forms.ModelForm):
     class Meta:
